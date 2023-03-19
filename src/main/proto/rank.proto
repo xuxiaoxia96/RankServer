@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package com.example.rank;
+
+option java_multiple_files = true;
+option java_package = "com.example.rank";
+option java_outer_classname = "RankProto";
+
+service RankService {
+  rpc CreateRank(CreateRankRequest) returns (CreateRankResponse) {}
+  rpc AddScore(AddScoreRequest) returns (AddScoreResponse) {}
+  rpc GetRankByUuid(GetRankByUuidRequest) returns (GetRankByUuidResponse) {}
+  rpc GetAllRanks(GetAllRanksRequest) returns (GetAllRanksResponse) {}
+  rpc ClearRank(ClearRankRequest) returns (ClearRankResponse) {}
+}
+
+message CreateRankRequest {
+  string name = 1;
+  string uuid = 2;
+}
+
+message CreateRankResponse {}
+
+message AddScoreRequest {
+  string rankName = 1;
+  string uuid = 2;
+  int32 score = 3;
+}
+
+message AddScoreResponse {}
+
+message GetRankByUuidRequest {
+  string uuid = 1;
+  string rankName = 2;
+}
+
+message GetRankByUuidResponse {
+  int32 rank = 1;
+}
+
+message GetAllRanksRequest {
+  string rankName = 1;
+}
+
+message Rank {
+  string uuid = 1;
+  int32 score = 2;
+}
+
+message GetAllRanksResponse {
+  repeated Rank ranks = 1;
+}
+
+message ClearRankRequest {
+  string name = 1;
+}
+
+message ClearRankResponse {}

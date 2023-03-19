@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package com.example.rank;
+
+option java_multiple_files = true;
+option java_package = "com.example.rank";
+
+service RankService {
+  // 新增排行榜
+  rpc addRank (RankInfo) returns (Empty) {}
+  // 插入排行榜
+  rpc insertRank (InsertRankRequest) returns (Empty) {}
+  // 查询排行榜
+  rpc getRank (GetRankRequest) returns (RankInfo) {}
+  // 查询所有排名
+  rpc getAllRank (Empty) returns (RankList) {}
+  // 清空排行榜
+  rpc clearRank (RankInfo) returns (Empty) {}
+}
+
+message RankInfo {
+  string name = 1;
+  string uuid = 2;
+}
+
+message InsertRankRequest {
+  string uuid = 1;
+  int32 score = 2;
+}
+
+message GetRankRequest {
+  string uuid = 1;
+}
+
+message RankList {
+  repeated RankInfo ranks = 1;
+}
+
+message Empty {}
